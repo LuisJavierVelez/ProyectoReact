@@ -34,6 +34,26 @@ class App extends Component {
       this.scroll();
     });
   }
+  consultarApi = () => {
+    const termino=this.state.termino;
+    const pagina= this.state.pagina;
+
+    const url = `https://pixabay.com/api/?key=30715967-5ba022496f0ac17e98129ea0d&q=${termino}}&image_type=photo&pretty=true&page=${pagina}`;
+    fetch(url)
+    .then(respuesta => respuesta.json())
+    .then(resultado => this.setState({imagenes : resultado.hits}))
+  }
+
+  datosBusqueda = (termino) => {
+      this.setState({
+        termino: termino,
+        pagina:1     
+    },()=>{
+      this.consultarApi();
+      this.scroll();
+
+    })
+  }
   render() { 
     return(
       <div className='app container'>
