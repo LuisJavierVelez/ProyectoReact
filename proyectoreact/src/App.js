@@ -1,39 +1,53 @@
-
-import React, { Component} from 'react';
+import React, {Component} from 'react';
 import Buscador from './componentes/Buscador';
-import Resultado from './componentes/Resultado';
+import Resultado  from './componentes/Resultados';
 class App extends Component {
+  //creamos el objeto state
   state = {
-    termino : '',
+    termino : '', 
     imagenes : [],
-    pagina : '',
+    pagina : ''
   }
-  scroll = () => { 
-    const elemento = document.querySelector('.jumbotron');
-    elemento.scrollIntoView('smooth','start');
-  }
+
+scroll = () => {
+  const elemento = document.querySelector('.jumbotron');
+  elemento.scrollIntoView('smooth', 'start');
+}
+  
   paginaAnterior = () => {
-    let pagina = this.state.pagina;
-    if(pagina === 1)return null;
-    pagina -=1;
-    this.setState({
-      pagina
-    }, () => {
-      this.consultarApi();
-      this.scroll();
-    });
+      //leer el state de la página actual
+      let pagina= this.state.pagina;
+       //si la página es uno ya no ir hacia atrás
+      if(pagina ===1)return null;
+      //sumar uno a la pagina actual
+      pagina -=1;  
+      //agregar el cambio al state
+      this.setState({
+        pagina
+      }, () => {
+          this.consultarApi();
+          this.scroll();
+
+      });
+
+      //console.log(pagina);
   }
   paginaSiguiente = () => {
-    let pagina = this.state.pagina;
-    if(pagina === 1)return null;
+    //leer el state de la página actual
+    let pagina= this.state.pagina;
+    //sumar uno a la pagina actual
     pagina +=1;
+    //agregar el cambio al state
     this.setState({
       pagina
     }, () => {
       this.consultarApi();
       this.scroll();
     });
+
+    //console.log(pagina);
   }
+
   consultarApi = () => {
     const termino=this.state.termino;
     const pagina= this.state.pagina;
@@ -54,27 +68,26 @@ class App extends Component {
 
     })
   }
-  render() { 
-    return(
+
+  render() {
+    return (
       <div className='app container'>
-        <div className='jumbotron'>
-          <p className='lead text-center'>Buscador de Imagenes</p>
-          <Buscador datosBusqueda={this.datosBusqueda}></Buscador>
+        <div className="jumbotron">
+          <br/><p className="lead text-center">Buscador de imágenes</p>
+          <Buscador 
+            datosBusqueda={this.datosBusqueda}
+          />             
         </div>
         <div className='row justify-content-center'>
-          <Resultado
-            imagenes={this.state.imagenes}
-            paginaAnterior={this.paginaAnterior}
-            paginaSiguiente={this.paginaSiguiente}
+            <Resultado
+              imagenes={this.state.imagenes}
+              paginaAnterior={this.paginaAnterior}
+              paginaSiguiente={this.paginaSiguiente}
 
-          />
-        </div>
+            />   
+        </div>  
       </div>
-    )
-    
+    );
   }
 }
-
-
-
 export default App;
