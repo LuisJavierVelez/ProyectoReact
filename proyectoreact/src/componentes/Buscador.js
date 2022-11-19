@@ -22,6 +22,7 @@ class Buscador extends Component {
                     </div>
                 </div>
             </form>
-        )
+        );
     }
 }
+export default Buscador;
