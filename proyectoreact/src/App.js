@@ -12,6 +12,28 @@ class App extends Component {
     const elemento = document.querySelector('.jumbotron');
     elemento.scrollIntoView('smooth','start');
   }
+  paginaAnterior = () => {
+    let pagina = this.state.pagina;
+    if(pagina === 1)return null;
+    pagina -=1;
+    this.setState({
+      pagina
+    }, () => {
+      this.consultarApi();
+      this.scroll();
+    });
+  }
+  paginaSiguiente = () => {
+    let pagina = this.state.pagina;
+    if(pagina === 1)return null;
+    pagina +=1;
+    this.setState({
+      pagina
+    }, () => {
+      this.consultarApi();
+      this.scroll();
+    });
+  }
   render() { 
     return(
       <div className='app container'>
