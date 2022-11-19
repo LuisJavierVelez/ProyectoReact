@@ -11,6 +11,15 @@ class App extends Component {
       <div className='app container'>
         <div className='jumbotron'>
           <p className='lead text-center'>Buscador de Imagenes</p>
+          <Buscador datosBusqueda={this.datosBusqueda}></Buscador>
+        </div>
+        <div className='row justify-content-center'>
+          <Resultado
+            imagenes={this.state.imagenes}
+            paginaAnterior={this.paginaAnterior}
+            paginaSiguiente={this.paginaSiguiente}
+
+          />
         </div>
       </div>
     )
