@@ -8,6 +8,10 @@ class App extends Component {
     imagenes : [],
     pagina : '',
   }
+  scroll = () => { 
+    const elemento = document.querySelector('.jumbotron');
+    elemento.scrollIntoView('smooth','start');
+  }
   render() { 
     return(
       <div className='app container'>
